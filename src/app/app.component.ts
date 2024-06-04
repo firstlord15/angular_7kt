@@ -16,10 +16,23 @@ export class User {
                     </p>
                 </div>
                 <div style="margin: 30px">
-                    <div [ngClass]="{form_group:true}" *ngFor="let input of inputs">
-                        <label [ngClass]="{text: true}" style="font-width: bold;">{{ input[0] }}</label>
-                        <input [(ngModel)]="user." name="{{input[0]}}" [ngClass]="{input: true, text: true}"
-                               style="font-size: 16px" type="{{input[1]}}" class="form-control-plaintext">
+                    <div [ngClass]="{form_group:true}">
+                        <div>
+                            <label [ngClass]="{text: true}" style="font-width: bold;">First Name</label>
+                            <input [(ngModel)]="this.first_name" name="first_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="text" class="form-control-plaintext">
+                        </div>
+                        <div>
+                            <label [ngClass]="{text: true}" style="font-width: bold;">Last Name</label>
+                            <input [(ngModel)]="this.last_name" name="last_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="text" class="form-control-plaintext">
+                        </div>
+                        <div>
+                            <label [ngClass]="{text: true}" style="font-width: bold;">Email</label>
+                            <input [(ngModel)]="this.email" name="email" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="email" class="form-control-plaintext">
+                        </div>
+                        <div>
+                            <label [ngClass]="{text: true}" style="font-width: bold;">Password</label>
+                            <input [(ngModel)]="this.password" name="first_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="password" class="form-control-plaintext">
+                        </div>
                     </div>
                     <div style="margin: 30px 0" [ngClass]="{form_group:true}">
                         <button class="custom_button" data-text="Awesome" (click)="addUser()">
@@ -28,22 +41,15 @@ export class User {
                         </button>
                     </div>
                 </div>
-                <div *ngIf="!isError" [ngClass]="{visible: !isError}">
-                    <div class="error_box">
-                        <div class="error_line"></div>
-                            <p class="error_text">Надо заполнить все поля</p>
-                        <div class="error_line"></div>
-                    </div>
-                </div>
                 <div [ngClass]="{container: true}">
                     <h1 [ngClass]="{subtitle__user: true}">Добавленные пользователи: </h1>
                     <div [ngClass]="{card: true, background: true}" *ngFor="let user of users; index as i;">
                         <h4 [ngClass]="{subtitle: true}">[ Пользователь номер {{ i }}    ]</h4>
                         <ul>
-                            <li [ngClass]="{text: true}">{{ inputs[0][0] }}: <span style="color: aquamarine;">{{ user.first_name }}</span></li>
-                            <li [ngClass]="{text: true}">{{ inputs[1][0] }}: <span style="color: aquamarine;">{{ user.last_name }}</span></li>
-                            <li [ngClass]="{text: true}">{{ inputs[2][0] }}: <span style="color: aquamarine;">{{ user.email }}</span></li>
-                            <li [ngClass]="{text: true}">{{ inputs[3][0] }}: <span style="color: aquamarine;">{{ user.password }}</span></li>
+                            <li [ngClass]="{text: true}">first_name: <span style="color: aquamarine;">{{ user.first_name }}</span></li>
+                            <li [ngClass]="{text: true}">last_name: <span style="color: aquamarine;">{{ user.last_name }}</span></li>
+                            <li [ngClass]="{text: true}">email: <span style="color: aquamarine;">{{ user.email }}</span></li>
+                            <li [ngClass]="{text: true}">password: <span style="color: aquamarine;">{{ user.password }}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -51,7 +57,6 @@ export class User {
         `,
     styles: [
         `
-            .visible {display: none}
             .input{width: 100%; color: black!important; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
             .form_group{width: 300px; display: flex;  flex-direction: column; justify-content: center; align-items: stretch}
             .wrapper{margin: 60px auto; padding:  50px 15px; width: 1200px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
@@ -67,30 +72,21 @@ export class User {
 })
 
 export class AppComponent {
-    isError: boolean = false;
     first_name: string = ""
     last_name: string = ""
     email: string = ""
     password: string = ""
 
-    inputs: string[][] = [
-        ["first_name", "text"],
-        ["last_name", "text"],
-        ["email", "email"],
-        ["password", "password"]
-    ]
-
     user: User = new User("Ratmir", "Ashimov", "ashimovr21@st.ithub.ru", "ffffffff")
     users: User[] = [this.user]
 
     addUser(){
-        if (this.first_name != "" && this.last_name != "" && this.email != "" && this.password != ""){
+        if (this.first_name.length != 0 && this.last_name.length != 0 && this.email.length != 0 && this.password.length != 0){
             this.users.push(new User(this.first_name, this.last_name, this.email, this.password))
-        }
-        else {
-            this.isError == true;
+            this.first_name = ""
+            this.last_name = ""
+            this.email = ""
+            this.password = ""
         }
     }
-
-    protected readonly visible = visible;
 }
