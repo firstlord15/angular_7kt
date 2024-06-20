@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import {visible} from "ansi-colors";
 
 export class User {
     constructor(public first_name: string, public last_name: string, public email: string, public password: string) {}
@@ -12,26 +11,29 @@ export class User {
         `
             <div [ngClass]="{wrapper: true, background: true}">
                 <div class="">
-                    <p [ngClass]="{title: true}" class="text-center"><kbd style="padding: 15px; border-radius: 20px">Registration</kbd>
+                    <p [ngClass]="{title: true}" class="text-center">
+                        <kbd style="padding: 15px; border-radius: 20px">
+                            Registration
+                        </kbd>
                     </p>
                 </div>
-                <div style="margin: 30px">
+                <div style="margin: 30px;" [ngClass]="{d_flex: true}">
                     <div [ngClass]="{form_group:true}">
-                        <div>
-                            <label [ngClass]="{text: true}" style="font-width: bold;">First Name</label>
-                            <input [(ngModel)]="this.first_name" name="first_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="text" class="form-control-plaintext">
+                        <div class="form__group field">
+                            <label class="form__label">First Name</label>
+                            <input [(ngModel)]="this.first_name" placeholder="firstname" name="first_name" type="text" class="form__field" required>
                         </div>
-                        <div>
-                            <label [ngClass]="{text: true}" style="font-width: bold;">Last Name</label>
-                            <input [(ngModel)]="this.last_name" name="last_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="text" class="form-control-plaintext">
+                        <div class="form__group field">
+                            <label class="form__label">Last Name</label>
+                            <input [(ngModel)]="this.last_name" placeholder="lastname" name="last_name" type="text" class="form__field" required>
                         </div>
-                        <div>
-                            <label [ngClass]="{text: true}" style="font-width: bold;">Email</label>
-                            <input [(ngModel)]="this.email" name="email" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="email" class="form-control-plaintext">
+                        <div class="form__group field">
+                            <label class="form__label">Email</label>
+                            <input [(ngModel)]="this.email" placeholder="email" name="email" type="email" class="form__field" required>
                         </div>
-                        <div>
-                            <label [ngClass]="{text: true}" style="font-width: bold;">Password</label>
-                            <input [(ngModel)]="this.password" name="first_name" [ngClass]="{input: true, text: true}" style="font-size: 16px" type="password" class="form-control-plaintext">
+                        <div class="form__group field">
+                            <label class="form__label">Password</label>
+                            <input [(ngModel)]="this.password" placeholder="password" name="first_name" type="password" class="form__field" required>
                         </div>
                     </div>
                     <div style="margin: 30px 0" [ngClass]="{form_group:true}">
@@ -49,7 +51,7 @@ export class User {
                             <li [ngClass]="{text: true}">first_name: <span style="color: aquamarine;">{{ user.first_name }}</span></li>
                             <li [ngClass]="{text: true}">last_name: <span style="color: aquamarine;">{{ user.last_name }}</span></li>
                             <li [ngClass]="{text: true}">email: <span style="color: aquamarine;">{{ user.email }}</span></li>
-                            <li [ngClass]="{text: true}">password: <span style="color: aquamarine;">{{ user.password }}</span></li>
+                            <li [ngClass]="{text: true}">password: <span style="color: aquamarine;">{{ '*'.repeat(user.password.length) }}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -57,8 +59,8 @@ export class User {
         `,
     styles: [
         `
-            .input{width: 100%; color: black!important; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
-            .form_group{width: 300px; display: flex;  flex-direction: column; justify-content: center; align-items: stretch}
+            .d_flex{display: flex; justify-content: center; align-content: center; flex-direction: column; flex-wrap: wrap; width: 500px}
+            .form_group{width: 100%; display: flex;  flex-direction: column; justify-content: center; align-items: center}
             .wrapper{margin: 60px auto; padding:  50px 15px; width: 1200px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
             .background{border-radius: 30px; background: #141414; box-shadow: #070707 0 0 10px;}
             .container{display: flex; flex-wrap: wrap; width: 1100px}
